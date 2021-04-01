@@ -1,0 +1,38 @@
+*****Install the following:********
+
+1. Install React Navigation
+npm install react-navigation
+
+2. Install Dependencies
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
+3. Install React Navigation Stack
+npm install react-navigation-stack @react-native-community/masked-view
+
+4. Install React Navigation Tabs
+npm install react-navigation-tabs
+
+5. npm install react-native-elements
+
+
+******To start**********
+Dev: npm run start
+
+
+********Basic Set up for components/screens********
+
+import React from 'react'
+import {View, StyleSheet, Text} from 'react-native'
+
+const TODO = () => {
+
+    return (
+        <Text>TODO</Text>
+    )
+}
+
+const styles = StyleSheet.create({
+
+})
+
+export default TODO
