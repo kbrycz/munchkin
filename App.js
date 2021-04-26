@@ -7,8 +7,8 @@ import GameScreen from './src/screens/GameScreen';
 
 const switchNavigator = createSwitchNavigator(
   {
+    Game: GameScreen,
     Home: HomeScreen,
-    Game: GameScreen
   }
 );
 
