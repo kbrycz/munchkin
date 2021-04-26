@@ -1,5 +1,5 @@
-import React from 'react'
-import {View, StyleSheet, Text, FlatList, SafeAreaView, TouchableOpacity, Alert } from 'react-native'
+import React, {useState, useEffect} from 'react'
+import {View, StyleSheet, Text, FlatList, SafeAreaView, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native'
 import ScoreBoxComponent from '../components/ScoreBoxComponent'
 import TitleBoxComponent from '../components/TitleBoxComponent'
 import { Ionicons } from '@expo/vector-icons'; 
@@ -8,29 +8,119 @@ const GameScreen = ({navigation}) => {
 
     // const players = navigation.getParam('players')
     // const score = navigation.getParam('score')
-    const players = 5
+    const players = 6
     const score = 10
 
-    const data = [
-        {
-          id: 1,
-          name: 'Player 1',
-          level: 6,
-          combat: 10
-        },
-        {
-            id: 2,
-            name: 'Player 2',
-            level: 3,
-            combat: 4
-        },
-        {
-            id: 3,
-            name: 'Player 3',
-            level: 13,
-            combat: 14
-        },
-      ];
+    const [data, updateData] = useState([])
+
+    useEffect(() => {
+        setupGame()
+    }, [])
+
+    const setupGame = () => {
+        for (let i = 0; i < players; ++i) {
+            updateData(arr => [...arr, {
+                id: i,
+                name: 'Player ' + (i + 1),
+                level: 1,
+                combat: 1
+            }])
+        }
+    }
+
+    const restart = () => {
+        let newData = []
+        for (let i = 0; i < players; ++i) {
+            newData.push(
+                {
+                    id: i,
+                    name: data[i].name,
+                    level: 1,
+                    combat: 1
+                }
+            )
+        }
+        updateData(newData)
+
+    }
+
+    const changeName = (id, text) => {
+        updateData(
+            data.map(player => {
+                if (player.id === id ) {
+                    return {...player, name: text}
+                }
+                else {
+                    return player
+                }
+            })
+        )
+    }
+
+    const levelButtonPressed = (id, type) => {
+        let playerObj = {}
+
+        switch(type) {
+            case 'plus':
+                updateData(
+                    data.map(player => {
+                        if (player.id === id ) {
+                            playerObj = {...player, level : player.level + 1, combat : player.combat + 1}
+                            return {...player, level : player.level + 1, combat : player.combat + 1}
+                        }
+                        else {
+                            return player
+                        }
+                    }
+                ))
+                
+                if (playerObj.level === score) {
+                    Alert.alert(
+                        `Congratulations, ${playerObj.name}!`,
+                        "You are today's winner! Play again?",
+                        [
+                            { text: "Exit", onPress: () => navigation.navigate('Home') },
+                            { text: "Rematch", onPress: () => restart() },
+                          
+                        ]
+                    );
+                }
+                break
+            case 'minus':
+                updateData(
+                    data.map(player => 
+                        player.id === id && player.level > 1 && player.combat > 1
+                        ? {...player, level : player.level - 1, combat : player.combat - 1} 
+                        : player
+                ))
+                break
+            default:
+                return
+        }
+    }
+
+    const combatButtonPressed = (id, type) => {
+        switch(type) {
+            case 'plus':
+                updateData(
+                    data.map(player => 
+                        player.id === id 
+                        ? {...player, combat : player.combat + 1} 
+                        : player
+                ))
+                break
+            case 'minus':
+                updateData(
+                    data.map(player => 
+                        player.id === id && player.combat > 1
+                        ? {...player, combat : player.combat - 1} 
+                        : player
+                ))
+                break
+            default:
+                return
+        }
+    }
       
 
     const returnHome = () => {
@@ -51,17 +141,25 @@ const GameScreen = ({navigation}) => {
     return (<>
         <SafeAreaView style={styles.screen}>
             <TitleBoxComponent />
-            <FlatList
-                data={data}
-                renderItem={({ item }) => (
-                    <ScoreBoxComponent player={item} />
-                )}
-                keyExtractor={player => player.id}
-                style={styles.list}
-            />
+            <KeyboardAvoidingView
+            behavior="padding">
+                <FlatList
+                    data={data}
+                    renderItem={({ item }) => (
+                        <ScoreBoxComponent 
+                        player={item} 
+                        levelButtonPressed={levelButtonPressed} 
+                        combatButtonPressed={combatButtonPressed}
+                        changeName={changeName} />
+                    )}
+                    keyExtractor={player => player.id.toString()}
+                    style={styles.list}
+                />
+            </KeyboardAvoidingView>
             <TouchableOpacity onPress={returnHome}>
                 <Ionicons style={styles.quit} name="arrow-back-circle-sharp" />
             </TouchableOpacity>
+            
         </SafeAreaView>
         </>
     )
@@ -82,8 +180,16 @@ const styles = StyleSheet.create({
         color: 'black',
         position: 'absolute',
         bottom: 10,
-        left: 10
+        left: 10,
+        opacity: .5
+    },
+    container: {
+        padding: 10
     }
 })
+
+const navigationOptions = {
+    headerTransparent: false
+}
 
 export default GameScreen

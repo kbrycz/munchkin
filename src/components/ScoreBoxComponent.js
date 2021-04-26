@@ -3,23 +3,21 @@ import {View, StyleSheet, Text, TextInput} from 'react-native'
 import { AntDesign } from '@expo/vector-icons'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const ScoreBoxComponent = ({player}) => {
-
-
+const ScoreBoxComponent = ({player, levelButtonPressed, combatButtonPressed, changeName}) => {
 
     return (
         <View style={styles.container}>
-            <TextInput style={styles.name}>{player.name}</TextInput>
+            <TextInput maxLength={8} style={styles.name} onChangeText={(text) => changeName(player.id, text)} >{player.name}</TextInput>
             <View style={styles.box}>
                 <Text style={styles.item}>{player.level}</Text>
                 <View style={styles.buttonContainer}>
                     <View style={styles.btn}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => levelButtonPressed(player.id, 'plus')}>
                             <AntDesign style={styles.plus} name="plus" />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.btn}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => levelButtonPressed(player.id, 'minus')}>
                             <AntDesign style={styles.minus} name="minus" />
                         </TouchableOpacity>
                     </View>
@@ -29,12 +27,12 @@ const ScoreBoxComponent = ({player}) => {
                 <Text style={styles.item}>{player.combat}</Text>
                 <View style={styles.buttonContainer}>
                     <View style={styles.btn}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => combatButtonPressed(player.id, 'plus')}>
                             <AntDesign style={styles.plus} name="plus" />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.btn}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => combatButtonPressed(player.id, 'minus')}>
                             <AntDesign style={styles.minus} name="minus" />
                         </TouchableOpacity>
                     </View>
