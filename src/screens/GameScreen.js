@@ -1,6 +1,8 @@
 import React from 'react'
-import {View, StyleSheet, Text, FlatList, SafeAreaView} from 'react-native'
+import {View, StyleSheet, Text, FlatList, SafeAreaView, TouchableOpacity, Alert } from 'react-native'
 import ScoreBoxComponent from '../components/ScoreBoxComponent'
+import TitleBoxComponent from '../components/TitleBoxComponent'
+import { Ionicons } from '@expo/vector-icons'; 
 
 const GameScreen = ({navigation}) => {
 
@@ -29,24 +31,58 @@ const GameScreen = ({navigation}) => {
             combat: 14
         },
       ];
+      
+
+    const returnHome = () => {
+        Alert.alert(
+            "Returning to Home Screen",
+            "All of your current data will be lost. Do you wish to continue?",
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              { text: "Exit", onPress: () => navigation.navigate('Home') }
+            ]
+          );
+    }
 
     return (<>
-        <SafeAreaView>
+        <SafeAreaView style={styles.screen}>
+            <TitleBoxComponent />
             <FlatList
                 data={data}
                 renderItem={({ item }) => (
                     <ScoreBoxComponent player={item} />
                 )}
                 keyExtractor={player => player.id}
+                style={styles.list}
             />
+            <TouchableOpacity onPress={returnHome}>
+                <Ionicons style={styles.quit} name="arrow-back-circle-sharp" />
+            </TouchableOpacity>
         </SafeAreaView>
         </>
     )
 }
 
 const styles = StyleSheet.create({
+    screen: {
+        height: '100%'
+    },
     title: {
         fontSize: 45
+    },
+    list: {
+        overflow: 'visible'
+    },
+    quit: {
+        fontSize: 62,
+        color: 'black',
+        position: 'absolute',
+        bottom: 10,
+        left: 10
     }
 })
 
