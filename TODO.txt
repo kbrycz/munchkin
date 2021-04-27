@@ -1,0 +1,8 @@
+- Style home screen
+- Style player number screen
+- style winning score screen
+- style gameplay screen
+
+- Fix title box to be non see through
+- make sure top bar is also not see through for the list
+- Fix the back button on less than 6 players

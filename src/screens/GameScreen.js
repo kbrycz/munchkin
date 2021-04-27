@@ -6,10 +6,8 @@ import { Ionicons } from '@expo/vector-icons';
 
 const GameScreen = ({navigation}) => {
 
-    // const players = navigation.getParam('players')
-    // const score = navigation.getParam('score')
-    const players = 6
-    const score = 10
+    const players = navigation.getParam('players')
+    const score = navigation.getParam('score')
 
     const [data, updateData] = useState([])
 
