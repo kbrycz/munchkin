@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
         fontSize: 32,
         letterSpacing: 5,
         textTransform: 'uppercase',
-        fontWeight: '900',
         textAlign: 'center',
         borderWidth: 1,
         borderColor: '#fa983a',

@@ -1,8 +1,16 @@
 import React from 'react'
 import {StyleSheet, Dimensions, TouchableOpacity, Text} from 'react-native'
+import { useFonts } from 'expo-font';
 
 const PlayersComponent = (props) => {
 
+    const [loaded] = useFonts({
+        PressStart2P: require('../../assets/fonts/Press_Start_2P/PressStart2P-Regular.ttf'),
+    });
+    if (!loaded) {
+        return null;
+    }
+    
     buttonsArray = []
     for (let i = 2; i < 7; i++) {
         buttonsArray.push(
@@ -28,38 +36,39 @@ const PlayersComponent = (props) => {
 
 const styles = StyleSheet.create({
     title: {
-        width: Dimensions.get('window').width * .9,
-        marginLeft: Dimensions.get('window').width * .05,
-        marginRight: Dimensions.get('window').width * .05,
-        marginTop: Dimensions.get('window').height * .15,
+        width: Dimensions.get('window').width * .8,
+        marginLeft: Dimensions.get('window').width * .1,
+        marginRight: Dimensions.get('window').width * .1,
+        marginTop: Dimensions.get('window').height * .1,
+        marginBottom: 20,
         textAlign: 'center',
-        color: '#fff',
+        color: '#feefe0',
         fontWeight: '900',
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
         textShadowOffset: {width: -1, height: 1},
         textShadowRadius: 10,
         letterSpacing: 5,
         textTransform: 'uppercase',
-        fontSize: 42,
-        marginBottom: 30
+        fontSize: 35,
+        lineHeight: 80,
+        fontFamily: 'PressStart2P'
     },
     playerButton: {
         marginTop: 30,
-        width: Dimensions.get('window').width * .4,
-        marginLeft: Dimensions.get('window').width * .3,
-        marginRight: Dimensions.get('window').width * .3,
-        color: '#fff',
+        width: Dimensions.get('window').width * .9,
+        marginLeft: Dimensions.get('window').width * .05,
+        marginRight: Dimensions.get('window').width * .05,
+        color: '#fa983a',
         fontSize: 24,
         letterSpacing: 5,
-        textTransform: 'uppercase',
-        fontWeight: '900',
         textAlign: 'center',
         borderWidth: 1,
-        borderColor: '#68a0cf',
+        borderColor: '#fa983a',
         borderRadius: 10,
-        backgroundColor:'#68a0cf',
+        backgroundColor:'#feefe0',
         padding: 15,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        fontFamily: 'PressStart2P'
 
     },
 

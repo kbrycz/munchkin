@@ -1,8 +1,4 @@
-- Style home screen
-- Style player number screen
-- style winning score screen
-- style gameplay screen
+- Typing in score does not show winner
+- Make it so the boxes fill up the whole screen
 
-- Fix title box to be non see through
-- make sure top bar is also not see through for the list
-- Fix the back button on less than 6 players
+- SOLO or Group Play options

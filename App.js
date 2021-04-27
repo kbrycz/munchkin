@@ -9,6 +9,8 @@ const switchNavigator = createSwitchNavigator(
   {
     Home: HomeScreen,
     Game: GameScreen,
+
+
   }
 );
 

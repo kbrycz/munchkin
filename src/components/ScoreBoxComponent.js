@@ -2,9 +2,15 @@ import React from 'react'
 import {View, StyleSheet, Text, TextInput} from 'react-native'
 import { AntDesign } from '@expo/vector-icons'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useFonts } from 'expo-font';
 
 const ScoreBoxComponent = ({player, levelButtonPressed, combatButtonPressed, changeName}) => {
-
+    const [loaded] = useFonts({
+        PressStart2P: require('../../assets/fonts/Press_Start_2P/PressStart2P-Regular.ttf'),
+    });
+    if (!loaded) {
+        return null;
+    }
     return (
         <View style={styles.container}>
             <TextInput maxLength={8} style={styles.name} onChangeText={(text) => changeName(player.id, text)} >{player.name}</TextInput>
@@ -44,27 +50,35 @@ const ScoreBoxComponent = ({player, levelButtonPressed, combatButtonPressed, cha
 
 const styles = StyleSheet.create({
     container: {
-        borderWidth: 2,
-        marginBottom: 5,
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     name: {
-        fontSize: 30,
-        borderWidth: 2,
+        fontSize: 14,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderRightWidth: 2,
+        borderColor: '#fdcc9d',
         flex: 1,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#3c3c3c',
+        fontFamily: 'PressStart2P'
     },
     box: {
         flex: 1,
         flexDirection: 'column',
-        borderWidth: 2,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderRightWidth: 2,
+        borderColor: '#fdcc9d',
         textAlign: 'center'
     },
     item: {
         padding: 20,
-        fontSize: 32,
+        fontSize: 24,
         flex: 1,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#3c3c3c',
+        fontFamily: 'PressStart2P'
     },
     buttonContainer: {
         flex: 1,
@@ -74,14 +88,14 @@ const styles = StyleSheet.create({
         padding: 10,
         fontSize: 24,
         color: 'white',
-        backgroundColor: 'green',
+        backgroundColor: '#f97e08',
         textAlign: 'center'
     },
     minus: {
         padding: 10,
         fontSize: 24,
         color: 'white',
-        backgroundColor: 'red',
+        backgroundColor: '#fcbb7c',
         textAlign: 'center'
     },
     btn: {

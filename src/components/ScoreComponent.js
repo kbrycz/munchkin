@@ -1,14 +1,31 @@
 import React, {useState} from 'react'
-import {StyleSheet, Dimensions, TouchableOpacity, Text, TextInput} from 'react-native'
+import {StyleSheet, Dimensions, TouchableOpacity, Text, TextInput, Alert} from 'react-native'
 import { Ionicons } from '@expo/vector-icons'; 
+import { useFonts } from 'expo-font';
 
 const ScoreComponent = (props) => {
     const key = Platform.OS === 'ios' ? 'done' : 'next'
     const [score, setScore] = useState(10)
-
+    const [loaded] = useFonts({
+        PressStart2P: require('../../assets/fonts/Press_Start_2P/PressStart2P-Regular.ttf'),
+    });
+    if (!loaded) {
+        return null;
+    }
     const moveToGame = () => {
         const players = props.numPlayers
-        props.navigation.navigate('Game', {players, score})
+        if (score < 5) {
+            Alert.alert(
+                "Invalid Winning Score",
+                "Please Enter a Value of at Least 5",
+                [
+                  { text: "OK"}
+                ]
+              );
+        } else {
+            props.navigation.navigate('Game', {players, score})
+        }
+       
     }
 
     return (
@@ -17,10 +34,9 @@ const ScoreComponent = (props) => {
         onPress={props.moveBackScreen}>
             <Ionicons name="arrow-back" style={styles.backButton} />
         </TouchableOpacity> 
-        <Text style={styles.title} h2>What is the Winning Score?</Text>
+        <Text style={styles.title} h2>Winning Score?</Text>
         <TextInput 
         maxLength={2}
-        mixLength={2}
         style={styles.textInput}
         keyboardType = 'numeric'
         returnKeyType={key}
@@ -41,51 +57,53 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width * .9,
         marginLeft: Dimensions.get('window').width * .05,
         marginRight: Dimensions.get('window').width * .05,
-        marginTop: Dimensions.get('window').height * .15,
+        marginTop: Dimensions.get('window').height * .1,
+        marginBottom: 20,
         textAlign: 'center',
-        color: '#fff',
+        color: '#feefe0',
         fontWeight: '900',
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
         textShadowOffset: {width: -1, height: 1},
         textShadowRadius: 10,
         letterSpacing: 5,
         textTransform: 'uppercase',
-        fontSize: 42,
-        marginBottom: 30
+        fontSize: 35,
+        lineHeight: 80,
+        fontFamily: 'PressStart2P'
     },
     textInput: {
-        marginTop: 40,
-        width: Dimensions.get('window').width * .4,
-        marginLeft: Dimensions.get('window').width * .3,
-        marginRight: Dimensions.get('window').width * .3,
-        color: '#68a0cf',
-        fontSize: 72,
+        marginTop: Dimensions.get('window').height * .1,
+        width: Dimensions.get('window').width * .7,
+        marginLeft: Dimensions.get('window').width * .15,
+        marginRight: Dimensions.get('window').width * .15,
+        color: '#fa983a',
+        fontSize: 62,
         letterSpacing: 5,
-        textTransform: 'uppercase',
-        fontWeight: '900',
         textAlign: 'center',
         borderWidth: 1,
-        borderColor: '#68a0cf',
+        borderColor: '#fdd5ae',
         borderRadius: 10,
-        backgroundColor:'#fff',
-        padding: 15,
+        backgroundColor:'#fdddbf',
+        paddingTop: Dimensions.get('window').height * .05,
+        paddingBottom: Dimensions.get('window').height * .05,
+        fontFamily: 'PressStart2P'
     },
     playButton: {
         width: Dimensions.get('window').width * .8,
         marginLeft: Dimensions.get('window').width * .1,
         marginRight: Dimensions.get('window').width * .1,
-        color: '#fff',
+        color: '#fa983a',
         fontSize: 32,
         letterSpacing: 5,
         textTransform: 'uppercase',
-        fontWeight: '900',
         textAlign: 'center',
         borderWidth: 1,
-        borderColor: '#68a0cf',
+        borderColor: '#fa983a',
         borderRadius: 10,
-        backgroundColor:'#68a0cf',
-        padding: 15,
-        overflow: 'hidden'
+        backgroundColor:'#feefe0',
+        padding: 20,
+        overflow: 'hidden',
+        fontFamily: 'PressStart2P'
 
     },
     playButtonContainer: {
@@ -99,7 +117,7 @@ const styles = StyleSheet.create({
         left: 20,
     },
     backButton: {
-        color: '#fff',
+        color: '#feefe0',
         fontSize: 42,
         letterSpacing: 3,
         textTransform: 'uppercase',

@@ -9,6 +9,9 @@ const GameScreen = ({navigation}) => {
     const players = navigation.getParam('players')
     const score = navigation.getParam('score')
 
+    // const players = 5
+    // const score = 8
+
     const [data, updateData] = useState([])
 
     useEffect(() => {
@@ -157,7 +160,6 @@ const GameScreen = ({navigation}) => {
             <TouchableOpacity onPress={returnHome}>
                 <Ionicons style={styles.quit} name="arrow-back-circle-sharp" />
             </TouchableOpacity>
-            
         </SafeAreaView>
         </>
     )
@@ -165,20 +167,21 @@ const GameScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
     screen: {
-        height: '100%'
+        height: '100%',
+        backgroundColor: '#feefe0'
     },
     title: {
         fontSize: 45
     },
     list: {
-        overflow: 'visible'
+        height: '100%'
     },
     quit: {
         fontSize: 62,
-        color: 'black',
+        color: '#f97e08',
         position: 'absolute',
-        bottom: 10,
-        left: 10,
+        bottom: 25,
+        left: 15,
         opacity: .5
     },
     container: {
