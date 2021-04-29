@@ -44,3 +44,4 @@ COLORS:
 
 MAIN BACKGROUND ORANGE: '#fa983a'
 Light Text orange: '#feefe0'
+TEXT: '#3c3c3c'

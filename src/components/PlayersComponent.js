@@ -22,10 +22,6 @@ const PlayersComponent = (props) => {
         )
     }
 
-    const buttonPressed = (numPlayers) => {
-        navigation.navigate('Score', {numPlayers})
-    }
-
     return (
         <>
         <Text style={styles.title} h2>How Many Players?</Text>

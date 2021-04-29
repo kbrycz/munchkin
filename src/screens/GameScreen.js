@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {View, StyleSheet, Text, FlatList, SafeAreaView, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native'
+import {StyleSheet, FlatList, SafeAreaView, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native'
 import ScoreBoxComponent from '../components/ScoreBoxComponent'
 import TitleBoxComponent from '../components/TitleBoxComponent'
 import { Ionicons } from '@expo/vector-icons'; 
@@ -74,8 +74,8 @@ const GameScreen = ({navigation}) => {
                         }
                     }
                 ))
-                
-                if (playerObj.level === score) {
+                if (playerObj.level >= score) {
+                    console.log("were in")
                     Alert.alert(
                         `Congratulations, ${playerObj.name}!`,
                         "You are today's winner! Play again?",
@@ -86,6 +86,7 @@ const GameScreen = ({navigation}) => {
                         ]
                     );
                 }
+                
                 break
             case 'minus':
                 updateData(
@@ -151,7 +152,8 @@ const GameScreen = ({navigation}) => {
                         player={item} 
                         levelButtonPressed={levelButtonPressed} 
                         combatButtonPressed={combatButtonPressed}
-                        changeName={changeName} />
+                        changeName={changeName}
+                        players={players} />
                     )}
                     keyExtractor={player => player.id.toString()}
                     style={styles.list}
@@ -174,13 +176,13 @@ const styles = StyleSheet.create({
         fontSize: 45
     },
     list: {
-        height: '100%'
+        height: '95%'
     },
     quit: {
         fontSize: 62,
         color: '#f97e08',
         position: 'absolute',
-        bottom: 25,
+        bottom: -25,
         left: 15,
         opacity: .5
     },

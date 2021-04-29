@@ -1,4 +1,8 @@
-- Typing in score does not show winner
-- Make it so the boxes fill up the whole screen
 
-- SOLO or Group Play options
+
+***********-------TODO----------******************
+
+
+***********-------STRETCH----------******************
+- Load image before app opens
+- mini splash screen

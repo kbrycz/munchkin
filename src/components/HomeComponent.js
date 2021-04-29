@@ -16,8 +16,12 @@ const HomeComponent = (props) => {
         <Text style={styles.title} h1>Munchkin Score Keeper</Text>
         <Image style={styles.image} source={require('../../assets/munchkin-logo.png')} />
         <TouchableOpacity style={styles.playButtonContainer} 
+        onPress={props.moveToSoloScreen}>
+            <Text style={styles.playButton}>Solo</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.playButtonContainer} 
         onPress={props.moveToPlayerScreen}>
-            <Text style={styles.playButton}>Play</Text>
+            <Text style={styles.playButton}>Group</Text>
         </TouchableOpacity>
         </>
     )
@@ -45,6 +49,7 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width * .8,
         marginLeft: Dimensions.get('window').width * .1,
         marginRight: Dimensions.get('window').width * .1,
+        marginBottom: 15,
         color: '#fa983a',
         fontSize: 32,
         letterSpacing: 5,
@@ -54,23 +59,20 @@ const styles = StyleSheet.create({
         borderColor: '#fa983a',
         borderRadius: 10,
         backgroundColor:'#feefe0',
-        padding: 20,
+        padding: 15,
         overflow: 'hidden',
         fontFamily: 'PressStart2P'
 
     },
     image: {
-        marginTop: 40,
-        width: Dimensions.get('window').width * .6,
-        marginLeft: Dimensions.get('window').width * .2,
-        marginRight: Dimensions.get('window').width * .2,
-        height: 300
+        marginTop: 20,
+        marginBottom: 70,
+        width: Dimensions.get('window').width * .5,
+        marginLeft: Dimensions.get('window').width * .25,
+        marginRight: Dimensions.get('window').width * .25,
+        height: 250
     },
-    playButtonContainer: {
-        position: 'absolute',
-        bottom: 80,
-        left:0,
-    }
+
 })
 
 export default HomeComponent

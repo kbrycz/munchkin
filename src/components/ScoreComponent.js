@@ -23,6 +23,7 @@ const ScoreComponent = (props) => {
                 ]
               );
         } else {
+            console.log(score)
             props.navigation.navigate('Game', {players, score})
         }
        

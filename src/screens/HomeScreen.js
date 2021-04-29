@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {ImageBackground, StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-navigation'
 import HomeComponent from '../components/HomeComponent'
 import PlayersComponent from '../components/PlayersComponent'
@@ -26,11 +26,15 @@ const HomeScreen = ({navigation}) => {
         }
     }
 
+    const moveToSoloScreen = () => {
+        navigation.navigate('Solo')
+    }
+
 
     const renderElement = () => {
         switch(status) {
             case 0:
-                return <HomeComponent moveToPlayerScreen={moveToPlayerScreen} />
+                return <HomeComponent moveToPlayerScreen={moveToPlayerScreen} moveToSoloScreen={moveToSoloScreen} />
             case 1:
                 return <PlayersComponent moveToScoreScreen={moveToScoreScreen} />
             case 2: 
@@ -64,28 +68,3 @@ const styles = StyleSheet.create({
 })
 
 export default HomeScreen
-
-
-/*
-        <ImageBackground style={ styles.background } 
-        resizeMode='cover' 
-        source={require('../../assets/background.jpg')}
-        blurRadius={3}>
-        <SafeAreaView style={styles.safe}>
-            {renderElement()}
-        </SafeAreaView>
-        
-        </ImageBackground>
-
-        const styles = StyleSheet.create({
-    safe: {
-        flex: 1
-    },
-    background: {
-        width: '100%',
-        height: '100%',
-        flex: 1 
-    }
-    
-})
-*/

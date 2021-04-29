@@ -1,7 +1,6 @@
 import React from 'react'
-import {View, StyleSheet, Text, TextInput} from 'react-native'
+import {View, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native'
 import { AntDesign } from '@expo/vector-icons'; 
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useFonts } from 'expo-font';
 
 const ScoreBoxComponent = ({player, levelButtonPressed, combatButtonPressed, changeName}) => {
@@ -64,6 +63,7 @@ const styles = StyleSheet.create({
         fontFamily: 'PressStart2P'
     },
     box: {
+        paddingTop: 30,
         flex: 1,
         flexDirection: 'column',
         borderTopWidth: 1,
